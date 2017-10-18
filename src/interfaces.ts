@@ -3,7 +3,7 @@ export interface iStateTree {
 }
 
 
-export interface iReducerObj {
+export interface iReducerCollection {
   [key: string]: Function
 }
 
@@ -23,4 +23,12 @@ export interface iObserver {
   next: Function,
   error?: Function,
   complete?: Function
+}
+
+export interface iSubscribe {
+  (value: iStateTree): void
+}
+
+export interface iReducer {
+  (state: iStateTree, action: iDerivedAction): iStateTree
 }
