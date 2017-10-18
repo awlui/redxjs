@@ -1,4 +1,4 @@
-# REDXJS
+# RedXJS
 
 ## Project Goals
 
