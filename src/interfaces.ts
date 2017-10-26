@@ -1,7 +1,10 @@
 export interface iStateTree {
-  [key: string]: Object
+  [key: string]: any
 }
 
+export interface iCountState {
+  count: number
+}
 
 export interface iReducerCollection {
   [key: string]: Function
@@ -31,4 +34,13 @@ export interface iSubscribe {
 
 export interface iReducer {
   (state: iStateTree, action: iDerivedAction): iStateTree
+}
+
+export interface iContext {
+  store: iRedxStore
+}
+export interface iRedxStore {
+  subscribe: Function,
+  dispatch: Function,
+  getState: Function
 }

@@ -13,22 +13,34 @@ const PATHS = {
 const commonConfig = merge([
   {
     entry: {
-      app: './src/index.ts'
+      app: './src/index.tsx'
+    },
+    externals: {
+      'rxjs/Rx': 'rxjs',
+      react: 'react',
+      'react-dom': 'react-dom'
     },
     output: {
       path: PATHS.dist,
+      library: 'Demo',
+      libraryTarget: 'umd',
       filename: '[name].js',
     },
     module: {
         rules: [
             {
-                test: /\.ts$/,
+                test: /\.tsx?$/,
                 loader: 'ts-loader',
+            },
+            {
+              enforce: 'pre',
+              test: /\.tsx?$/,
+              use: "source-map-loader"
             }
         ]
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     devtool: 'source-map',
   }

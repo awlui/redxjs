@@ -1,7 +1,7 @@
 {
-  "name": "generator-wp2-tsc",
+  "name": "redxjs",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Andy Lui <awlui2014@gmail.com> (https://awlui.github.io/)",
   "license": "MIT",
   "scripts": {
@@ -49,8 +49,18 @@
     "webpack-dev-server": "^2.9.2",
     "webpack-merge": "^4.1.0"
   },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "dependencies": {
     "@reactivex/rxjs": "^5.4.3",
-    "rxjs": "^5.4.3"
+    "@types/prop-types": "^15.5.2",
+    "@types/react": "^16.0.18",
+    "@types/react-dom": "^16.0.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "rxjs": "^5.4.3",
+    "source-map-loader": "^0.2.3"
   }
 }
