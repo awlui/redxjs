@@ -15,11 +15,11 @@ const commonConfig = merge([
     entry: {
       app: './src/index.tsx'
     },
-    externals: {
-      'rxjs/Rx': 'rxjs',
-      react: 'react',
-      'react-dom': 'react-dom'
-    },
+    // externals: {
+    //   'rxjs/Rx': 'rxjs',
+    //   react: 'react',
+    //   'react-dom': 'react-dom'
+    // },
     output: {
       path: PATHS.dist,
       library: 'Demo',
@@ -30,23 +30,31 @@ const commonConfig = merge([
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader',
+                use: ['ts-loader']
             },
-            {
-              enforce: 'pre',
-              test: /\.tsx?$/,
-              use: "source-map-loader"
-            }
+            // {
+            //   enforce: 'pre',
+            //   test: /\.tsx?$/,
+            //   use: "source-map-loader"
+            // }
         ]
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.js', '.ts', '.tsx']
     },
     devtool: 'source-map',
   }
 ]);
 
 const productionConfig = merge([
+{
+    externals: {
+      'rxjs/Rx': 'rxjs',
+      react: 'react',
+      'react-dom': 'react-dom',
+      'prop-types': 'prop-types'
+    }
+}
 ]);
 
 const developmentConfig = merge([
@@ -67,24 +75,22 @@ const developmentConfig = merge([
   }
 ]);
 const testConfig = merge([
-    {
-        module: {
-            rules: [{
-                test: /\.ts$/,
-                enforce: 'post',
-                loader: 'istanbul-instrumenter-loader',
-                options: {esModules: true},
-                exclude: /node_modules|spec/,
-            }]
-        }
-    }
+    // {
+    //     module: {
+    //         rules: [{
+    //             test: /\.ts$/,
+    //             enforce: 'post',
+    //             loader: 'istanbul-instrumenter-loader',
+    //             options: {esModules: true},
+    //             exclude: /node_modules|spec/,
+    //         }]
+    //     }
+    // }
 ]);
 module.exports = (env) => {
   if (nodeEnv === 'test') {
-    console.log('hit')
     return merge(commonConfig, testConfig);
-  }
-  if (env === 'production') {
+  } else if (env === 'production') {
     return merge(commonConfig, productionConfig);
   }
   return merge(developmentConfig, commonConfig);

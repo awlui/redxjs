@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for redxStore.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="index.html">All files</a> redxStore.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">27.66% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>13/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.89% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>13/45</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Observable, Subject } from 'rxjs/Rx';
+import { iStateTree, iReducerCollection, iObserver, iDerivedAction, iThunk, iSubscribe, iReducer, iCountState } from './interfaces';
+&nbsp;
+const noop <span class="fstat-no" title="function not covered" >= </span>function() {}
+export class RedxjsStore {
+    private _<span class="fstat-no" title="function not covered" >dispatch: Fu</span>nction;
+    private _time<span class="cstat-no" title="statement not covered" >Travel: Boolean;<span class="cstat-no" title="statement not covered" ></span></span>
+    private _ttCarou<span class="cstat-no" title="statement not covered" >sel: </span>Array&lt;iStateTree&gt; = [];
+    priv<span class="cstat-no" title="statement not covered" >ate _reducerCollection:</span> iReducerCollection;
+    priv<span class="cstat-no" title="statement not covered" >ate _obs: Observ<span class="fstat-no" title="function not covered" >ab</span>le&lt;iStateTree&gt;;</span>
+    public l<span class="cstat-no" title="statement not covered" >astState: iStateTree;</span>
+    private _unsubObj: { unsubscribe: Function };;
+&nbsp;
+    cons<span class="cstat-no" title="statement not covered" >tructor({ timeTr<span class="fstat-no" title="function not covered" >av</span>el: timeTravel = false} = {}) {</span>
+      this._<span class="cstat-no" title="statement not covered" >timeTravel = timeTravel;</span>
+      let subject = new Subject&lt;iStateTree&gt;();
+      this._obs <span class="cstat-no" title="statement not covered" >= subject;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    public get Carousel() {
+      re<span class="cstat-no" title="statement not covered" >turn this._ttCarousel;</span>
+    };<span class="cstat-no" title="statement not covered" ></span>
+    publ<span class="cstat-no" title="statement not covered" >ic getState = () =&gt; {</span>
+      return this.lastState;
+    }
+    public init(): void {
+      this._u<span class="fstat-no" title="function not covered" >ns</span>ubObj = this.genActionObservable();
+    }<span class="cstat-no" title="statement not covered" ></span>
+    public unsubscribe() {
+      this._unsubObj.unsubscribe();
+    }
+    private genActionObservable() {
+        var actionObservable = Observable.create((obs: iObserver) =&gt; {
+          this._dispatch = obs.ne<span class="fstat-no" title="function not covered" >xt</span>.bind(obs); // Actions flow through this callback
+<span class="cstat-no" title="statement not covered" >        });</span>
+&nbsp;
+        return actionObservable<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            .startWith('Initiate')</span>
+            .scan((state: iStateTree, action: iDerivedAction) =&gt; {
+                let newState = this.combineReduc<span class="fstat-no" title="function not covered" >er</span>(this._reducerCollection)(state, action);
+                this<span class="cstat-no" title="statement not covered" >.last</span>State = newState;
+                if (this._timeT<span class="cstat-no" title="statement not covered" >ravel) {<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                  this._ttCarousel.push(newState);</span>
+                }
+<span class="cstat-no" title="statement not covered" >                return newState;</span>
+            }, {})
+            .subsc<span class="fstat-no" title="function not covered" >ri</span>be(this._obs);
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    private comb<span class="cstat-no" title="statement not covered" >ineReducer(reducers: iReducerColle</span>ction) : iReducer {
+      return (state: iStateTree = {}, action: {type: string}) =&gt; {
+        retu<span class="cstat-no" title="statement not covered" >rn Object.keys(re</span>ducers).reduce(
+          function(nextState: iStateTree, key: string) {
+            nextState[key] = reducers[key](
+              state[key],
+              action<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >              )<span class="fstat-no" title="function not covered" >;</span></span>
+<span class="cstat-no" title="statement not covered" >            return nextState;<span class="cstat-no" title="statement not covered" ></span></span>
+          },<span class="cstat-no" title="statement not covered" > {}<span class="fstat-no" title="function not covered" ></span></span>
+          )<span class="cstat-no" title="statement not covered" ></span>
+      }<span class="cstat-no" title="statement not covered" ></span>
+    }
+&nbsp;
+    public subscribe(cb: iSubscribe) {
+      return this._obs.subscribe(cb);<span class="fstat-no" title="function not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    public genReducerCollection(reducerCollection<span class="fstat-no" title="function not covered" >: </span>iReducerCollection): void {
+      // Combine reducer takes an object of reducers but I collect the reducers as an Array here in order to enforce compile time checking of reducer parameter types
+      th<span class="cstat-no" title="statement not covered" >is._reducerCollection = reducerCollection;</span>
+    }
+     //Dispatch function will either take an action or a function that accepts a dispatch function
+    public dispatch = (action: (iDerivedAction | Function)) : void =&gt;
+     {
+      if (typeof action === "function") {
+        // Thunk logic
+        action(this.dispatch);
+        return;
+      }
+      this._dispatch(action);
+    }
+}
+// let fun1 = function(state = { count: 0 }, action: iDerivedAction) : iCountState {
+//       if (action.type === "click1") {
+//         return {
+//           count: state.count + 1
+//         }
+//       } else {
+//         return state;
+//       }
+//     }
+// let fun2 = function(state = { count: 0 }, action: iDerivedAction) {
+//       if (action.type === "click2") {
+//         return {
+//           count: state.count + 1
+//         }
+//       } else {
+//         return state;
+//       }
+//     }
+// var test = new RedxjsStore({ timeTravel: true })
+// var k: any = document.querySelector('button.one');
+// var k2: any = document.querySelector('button.two');
+&nbsp;
+// k.addEventListener("click", () =&gt; {
+//   let { fun1 } = test.getState();
+&nbsp;
+//   let count1 = fun1.count;
+//   test.dispatch({type: "click1", value: count1 });
+// });
+// k2.addEventListener("click", () =&gt; {
+//   let { fun2 } = test.getState();
+&nbsp;
+&nbsp;
+//   let count2 = fun2.count;
+//   test.dispatch({type: "click2", value: count2 });
+// });
+// test.dispatch(noop);
+&nbsp;
+// test.genReducerCollection({
+//   fun1,
+//   fun2
+// })
+&nbsp;
+// test.subscribe((data) =&gt; {
+//   console.log(test.Carousel);
+// });
+&nbsp;
+// var unsub = test.subscribe((data) =&gt; {
+//   console.log(test.Carousel);
+//   console.log("JOOMP");
+// });
+&nbsp;
+// test.init()
+// setTimeout(() =&gt; {
+//   test.unsubscribe();
+//   console.log("UNSUBBED")
+// }, 2000);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 07 2017 22:41:39 GMT-0800 (PST)
+</div>
+</div>
+<script src="prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="sorter.js"></script>
+</body>
+</html>

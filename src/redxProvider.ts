@@ -1,6 +1,5 @@
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-
 export class Provider extends React.Component<any,any> {
     getChildContext() {
         return {

@@ -3,26 +3,23 @@ import * as PropTypes from 'prop-types';
 import { Observable, Subject, Subscription } from 'rxjs/Rx';
 
 import { iStateTree, iContext, iRedxStore } from './interfaces';
-const noop = function(dummyFunction: Function): void {
-}
+const noop = function(dummyFunction: Function): void {}
 
 export const connect = ({mapState = noop, mapActions = noop} = {}) => {
-  console.log("BEFORE CONNECT")
   if (mapState === noop && mapActions === noop) {
     return (target: any) => {
       let func: any = function(props: any, { store }){
         return React.createElement(target, {
-          ...props
+          ...props,
+          dispatch: store.dispatch
         })
       }
       func.contextTypes = {
         store: PropTypes.object
       }
       return func;
-
     }
   }
-  console.log("AFTER CONNECT")
   return (target: any) => (
     _connect(mapState, mapActions, target)
   );
@@ -46,7 +43,7 @@ function _connect(mapState: Function, mapActions: Function, target: any) {
     }
      componentWillUnmount() {
        this.unsubObj.unsubscribe();
-      
+
     }
      render() {
       const {store} = this.context;
@@ -56,7 +53,6 @@ function _connect(mapState: Function, mapActions: Function, target: any) {
         {
           ...mapState(store),
           ...mapActions(dispatch),
-          dispatch: dispatch,
           ...props
         }
       );
@@ -69,4 +65,3 @@ function _connect(mapState: Function, mapActions: Function, target: any) {
 
   return Connect;
 }
-

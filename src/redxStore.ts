@@ -1,8 +1,6 @@
 import { Observable, Subject } from 'rxjs/Rx';
 import { iStateTree, iReducerCollection, iObserver, iDerivedAction, iThunk, iSubscribe, iReducer, iCountState } from './interfaces';
 
-
-
 const noop = function() {}
 export class RedxjsStore {
     private _dispatch: Function;
@@ -13,10 +11,9 @@ export class RedxjsStore {
     public lastState: iStateTree;
     private _unsubObj: { unsubscribe: Function };;
 
-
     constructor({ timeTravel: timeTravel = false} = {}) {
       this._timeTravel = timeTravel;
-      let subject = new Subject();
+      let subject = new Subject<iStateTree>();
       this._obs = subject;
 
     }
@@ -26,7 +23,7 @@ export class RedxjsStore {
     };
     public getState = () => {
       return this.lastState;
-    } 
+    }
     public init(): void {
       this._unsubObj = this.genActionObservable();
     }
@@ -51,7 +48,7 @@ export class RedxjsStore {
             .subscribe(this._obs);
     }
 
-    
+
     private combineReducer(reducers: iReducerCollection) : iReducer {
       return (state: iStateTree = {}, action: {type: string}) => {
         return Object.keys(reducers).reduce(
@@ -75,11 +72,11 @@ export class RedxjsStore {
       this._reducerCollection = reducerCollection;
     }
      //Dispatch function will either take an action or a function that accepts a dispatch function
-    public dispatch(action: (iDerivedAction | Function)) : void
+    public dispatch = (action: (iDerivedAction | Function)) : void =>
      {
       if (typeof action === "function") {
         // Thunk logic
-        console.log("FUNCTION DISPATCHED")
+        action(this.dispatch);
         return;
       }
       this._dispatch(action);
