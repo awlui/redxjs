@@ -13,18 +13,13 @@ const PATHS = {
 const commonConfig = merge([
   {
     entry: {
-      app: './src/index.tsx'
+      app: './src/index'
     },
-    // externals: {
-    //   'rxjs/Rx': 'rxjs',
-    //   react: 'react',
-    //   'react-dom': 'react-dom'
-    // },
     output: {
       path: PATHS.dist,
       library: 'Demo',
       libraryTarget: 'umd',
-      filename: '[name].js',
+      filename: 'index.js',
     },
     module: {
         rules: [
@@ -43,6 +38,8 @@ const commonConfig = merge([
         extensions: ['.js', '.ts', '.tsx']
     },
     devtool: 'source-map',
+    plugins: [
+    ]
   }
 ]);
 

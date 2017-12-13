@@ -5,7 +5,7 @@ import { Observable, Subject, Subscription } from 'rxjs/Rx';
 import { iStateTree, iContext, iRedxStore } from './interfaces';
 const noop = function(dummyFunction: Function): void {}
 
-export const connect = ({mapState = noop, mapActions = noop} = {}) => {
+export const connect = (mapState = noop, mapActions = noop) => {
   if (mapState === noop && mapActions === noop) {
     return (target: any) => {
       let func: any = function(props: any, { store }){
@@ -47,11 +47,12 @@ function _connect(mapState: Function, mapActions: Function, target: any) {
     }
      render() {
       const {store} = this.context;
+      const state = store.getState();
       const props = this.props;
-      const {dispatch} = this.context.store;
+      const {dispatch} = store;
       return React.createElement(target,
         {
-          ...mapState(store),
+          ...mapState(state),
           ...mapActions(dispatch),
           ...props
         }
@@ -59,9 +60,9 @@ function _connect(mapState: Function, mapActions: Function, target: any) {
     }
 
   }
-  Connect.contextTypes = {
-    store: PropTypes.object
-  }
+  // Connect.contextTypes = {
+  //   store: PropTypes.object
+  // }
 
   return Connect;
 }

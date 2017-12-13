@@ -8,6 +8,8 @@
     "noEmitHelpers": true,
     "noImplicitAny": false,
     "sourceMap": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
     "typeRoots": [
   "./node_modules/@types"
 ]

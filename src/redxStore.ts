@@ -1,28 +1,48 @@
 import { Observable, Subject } from 'rxjs/Rx';
-import { iStateTree, iReducerCollection, iObserver, iDerivedAction, iThunk, iSubscribe, iReducer, iCountState } from './interfaces';
+import { iStateTree, iObserver, iDerivedAction, iThunk, iSubscribe, iReducer, iCountState } from './interfaces';
 
 const noop = function() {}
-export class RedxjsStore {
+
+export let createStore = function(reducer: Function, initialState?: (iStateTree | Function), applyMiddleware?: Function) {
+  if (typeof initialState === 'function') {
+    let temp = applyMiddleware;
+    applyMiddleware = initialState;
+   initialState = temp;
+  }
+  if (applyMiddleware) {
+    return applyMiddleware(createStore)(reducer, initialState);
+  }
+  let store = new RedxjsStore();
+  store.initialState = initialState;
+  store.setReducer(reducer);
+  store.init();
+  return store;
+}
+class RedxjsStore {
     private _dispatch: Function;
     private _timeTravel: Boolean;
     private _ttCarousel: Array<iStateTree> = [];
-    private _reducerCollection: iReducerCollection;
+    private rootReducer: Function;
     private _obs: Observable<iStateTree>;
-    public lastState: iStateTree;
-    private _unsubObj: { unsubscribe: Function };;
+    private _currentState: iStateTree = {};
+    private _unsubObj: { unsubscribe: Function };
 
-    constructor({ timeTravel: timeTravel = false} = {}) {
+    constructor({ timeTravel = false} = {}) {
       this._timeTravel = timeTravel;
       let subject = new Subject<iStateTree>();
       this._obs = subject;
-
     }
-
+    public get initialState() {
+      return this._currentState;
+    }
+    public set initialState(state: iStateTree) {
+      this._currentState = state;
+    }
     public get Carousel() {
       return this._ttCarousel;
     };
     public getState = () => {
-      return this.lastState;
+      return this._currentState;
     }
     public init(): void {
       this._unsubObj = this.genActionObservable();
@@ -38,40 +58,28 @@ export class RedxjsStore {
         return actionObservable
             .startWith('Initiate')
             .scan((state: iStateTree, action: iDerivedAction) => {
-                let newState = this.combineReducer(this._reducerCollection)(state, action);
-                this.lastState = newState;
+                let newState = this.rootReducer(state, action);
+                this._currentState = newState;
                 if (this._timeTravel) {
                   this._ttCarousel.push(newState);
                 }
                 return newState;
-            }, {})
+            }, this._currentState)
             .subscribe(this._obs);
     }
 
 
-    private combineReducer(reducers: iReducerCollection) : iReducer {
-      return (state: iStateTree = {}, action: {type: string}) => {
-        return Object.keys(reducers).reduce(
-          function(nextState: iStateTree, key: string) {
-            nextState[key] = reducers[key](
-              state[key],
-              action
-              );
-            return nextState;
-          }, {}
-          )
-      }
-    }
 
-    public subscribe(cb: iSubscribe) {
+
+    public subscribe = (cb: iSubscribe) => {
       return this._obs.subscribe(cb);
     }
 
-    public genReducerCollection(reducerCollection: iReducerCollection): void {
-      // Combine reducer takes an object of reducers but I collect the reducers as an Array here in order to enforce compile time checking of reducer parameter types
-      this._reducerCollection = reducerCollection;
+    public setReducer(reducer: Function): void {
+      this.rootReducer = reducer;
     }
      //Dispatch function will either take an action or a function that accepts a dispatch function
+     //Will eventually convert to a redxjs to a middleware implementation
     public dispatch = (action: (iDerivedAction | Function)) : void =>
      {
       if (typeof action === "function") {
@@ -79,62 +87,9 @@ export class RedxjsStore {
         action(this.dispatch);
         return;
       }
+      if (typeof action === undefined) {
+        return;
+      }
       this._dispatch(action);
     }
 }
-// let fun1 = function(state = { count: 0 }, action: iDerivedAction) : iCountState {
-//       if (action.type === "click1") {
-//         return {
-//           count: state.count + 1
-//         }
-//       } else {
-//         return state;
-//       }
-//     }
-// let fun2 = function(state = { count: 0 }, action: iDerivedAction) {
-//       if (action.type === "click2") {
-//         return {
-//           count: state.count + 1
-//         }
-//       } else {
-//         return state;
-//       }
-//     }
-// var test = new RedxjsStore({ timeTravel: true })
-// var k: any = document.querySelector('button.one');
-// var k2: any = document.querySelector('button.two');
-
-// k.addEventListener("click", () => {
-//   let { fun1 } = test.getState();
-
-//   let count1 = fun1.count;
-//   test.dispatch({type: "click1", value: count1 });
-// });
-// k2.addEventListener("click", () => {
-//   let { fun2 } = test.getState();
-
-
-//   let count2 = fun2.count;
-//   test.dispatch({type: "click2", value: count2 });
-// });
-// test.dispatch(noop);
-
-// test.genReducerCollection({
-//   fun1,
-//   fun2
-// })
-
-// test.subscribe((data) => {
-//   console.log(test.Carousel);
-// });
-
-// var unsub = test.subscribe((data) => {
-//   console.log(test.Carousel);
-//   console.log("JOOMP");
-// });
-
-// test.init()
-// setTimeout(() => {
-//   test.unsubscribe();
-//   console.log("UNSUBBED")
-// }, 2000);
